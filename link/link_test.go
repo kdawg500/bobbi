@@ -6,9 +6,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestValidate(t *testing.T) {
-	linkString := "facebook.com"
-	expected := "https://facebook.com"
-	actual := Validate(linkString)
-	assert.Equal(t, expected, actual)
+func TestValidate_Success(t *testing.T) {
+	testCases := []struct {
+		name     string
+		link     string
+		expected string
+	}{
+		{
+			name:     "with https",
+			link:     "https://facebook.com",
+			expected: "https://facebook.com",
+		},
+		{
+			name:     "without https",
+			link:     "facebook.com",
+			expected: "https://facebook.com",
+		},
+	}
+
+	for _, tc := range testCases {
+		actual := Validate(tc.link)
+		assert.Equal(t, tc.expected, actual)
+	}
+}
+
+func TestValidate_InvalidLink(t *testing.T) {
+	linkString := "deez"
+	assert.Panics(t, func() { Validate(linkString) })
 }
