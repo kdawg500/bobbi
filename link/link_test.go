@@ -31,6 +31,16 @@ func TestValidate_Success(t *testing.T) {
 }
 
 func TestValidate_InvalidLink(t *testing.T) {
-	linkString := "deez"
-	assert.Panics(t, func() { Validate(linkString) })
+	testCases := []struct {
+		name string
+		link string
+	}{
+		{
+			name: "no domain",
+			link: "https://facebook",
+		},
+	}
+	for _, tc := range testCases {
+		assert.Panics(t, func() { Validate(tc.link) })
+	}
 }

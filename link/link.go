@@ -17,11 +17,7 @@ func Validate(link string) string {
 
 	hostSegments := strings.Split(parsedURL.Host, ".")
 	if len(hostSegments) == 1 {
-		panic("bobbi: invalid url provided, missing domain")
-	}
-
-	if parsedURL.Scheme == "" {
-		parsedURL.Scheme = "https"
+		panic("bobbi: nice try diddy, missing domain in url")
 	}
 
 	return parsedURL.String()
