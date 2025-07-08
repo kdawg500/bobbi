@@ -1,18 +1,20 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"time"
 
-	"github.com/kdawg500/bobbi/link"
+	"github.com/fatih/color"
 )
+
+var visited = map[string]bool{}
 
 func main() {
 	start := time.Now()
 	args := os.Args[1:]
-	link.Validate(args[0])
+	input := args[0]
 
 	duration := time.Since(start)
-	fmt.Println(duration)
+	color.Red(input)
+	color.Cyan(duration.String())
 }
